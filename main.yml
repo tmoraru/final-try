@@ -1,9 +1,12 @@
 - hosts: localhost
+  vars:
+  - host_name: fuchicorp.com 
+
   tasks:
 
-  # - name: Install Prerequisites
-  #   import_role:
-  #     name: prerequisites
+  - name: Install Prerequisites
+    import_role:
+      name: prerequisites
 
   # - name: Install cert
   #   import_role:

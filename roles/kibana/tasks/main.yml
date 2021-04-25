@@ -27,14 +27,14 @@
     # dest: /etc/nginx/conf.d/elk.conf
   # notify: Restart Nginx
 
-- name: Configure tls
-  command: sudo git clone https://github.com/certbot/certbot /opt/letsencrypt
 
-- name: Install cert bot
-  command: sudo yum install certbot -y  && yum install python-certbot-nginx -y 
+- name: Cloning certbot to instnace
+  ansible.builtin.git:
+    repo: 'https://github.com/certbot/certbot'
+    dest: /opt/letsencrypt
 
 - name: Generating certs for nginx 
-  command: sudo certbot --nginx -d final.awsoptimized.com -d www.final.awsoptimized.com
+  command: sudo certbot run -n  --agree-tos --nginx -d {{ host_name }} -d www.{{ host_name }} --email  example@gmail.com
 
 
 - name: Create kibanaadmin and password
